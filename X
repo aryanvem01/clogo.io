@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Percentage Calculator B/w 500</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .calculator {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        input[type="text"],
+        input[type="number"] {
+            width: 200px;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            display: none;
+        }
+        .result {
+            font-size: 24px;
+            color: #333;
+            text-align: center;
+        }
+        .good-rank {
+            color: #5cb85c;
+            font-weight: bold;
+            font-style: italic;
+        }
+        .celebration {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            display: none;
+        }
+        .balloon {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: #f0ad4e;
+            border-radius: 50%;
+            animation: balloonAnimation 5s infinite alternate;
+        }
+        @keyframes balloonAnimation {
+            0% {
+                transform: translateY(0) rotate(0);
+            }
+            100% {
+                transform: translateY(-500px) rotate(360deg);
+            }
+        }
+        .developer {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            color: #777;
+            font-style: italic;
+        }
+        .calculator-heading {
+            font-weight: bold;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calculator">
+    <div class="calculator-heading">Percentage Calculator B/w 500</div>
+    <label for="name">Enter Your Name:</label>
+    <input type="text" id="name" required><br>
+    <label for="overallNumber">Overall Number:</label>
+    <input type="number" id="overallNumber" min="0" max="500" required><br>
+    <button onclick="calculatePercentage()">Calculate</button>
+</div>
+
+<div class="popup" id="popup">
+    <h2>Result</h2>
+    <p id="resultMessage" class="result"></p>
+    <button onclick="checkAnotherResult()">Check Another Result</button>
+    <button onclick="goHome()">Home</button>
+    <button onclick="exit()">Exit</button>
+</div>
+
+<div class="celebration" id="celebration">
+    <div class="balloon" style="top: 20%; left: 10%;"></div>
+    <div class="balloon" style="top: 30%; left: 20%;"></div>
+    <div class="balloon" style="top: 40%; left: 30%;"></div>
+    <div class="balloon" style="top: 50%; left: 40%;"></div>
+    <div class="balloon" style="top: 60%; left: 50%;"></div>
+    <div class="balloon" style="top: 70%; left: 60%;"></div>
+    <div class="balloon" style="top: 80%; left: 70%;"></div>
+    <div class="balloon" style="top: 90%; left: 80%;"></div>
+    <div class="balloon" style="top: 100%; left: 90%;"></div>
+</div>
+
+<div class="developer">Developed by Aryan Verma</div>
+
+<script>
+    function calculatePercentage() {
+        const name = document.getElementById('name').value;
+        const overallNumber = parseInt(document.getElementById('overallNumber').value);
+        const percentage = (overallNumber / 500) * 100;
+
+        let message;
+        if (percentage < 60) {
+            message = `<span style="color: #d9534f;">Fail</span><br>No matter If You Fail, Fail Again, Fail Better, You Can Do`;
+        } else if (percentage >= 60 && percentage <= 70) {
+            message = `<span class="good-rank">Good - Second Division</span>`;
+        } else if (percentage > 70 && percentage < 90) {
+            message = `<span class="good-rank">Excellent - First Honors</span>`;
+        } else {
+            message = `<span class="good-rank">Legend - Fabulous!</span>`;
+            document.getElementById('celebration').style.display = 'block';
+        }
+
+        document.getElementById('resultMessage').innerHTML = `${name}, you scored ${percentage.toFixed(2)}%. ${message}`;
+        document.getElementById('popup').style.display = 'block';
+    }
+
+    function checkAnotherResult() {
+        document.getElementById('popup').style.display = 'none';
+        document.getElementById('celebration').style.display = 'none';
+        document.getElementById('name').value = '';
+        document.getElementById('overallNumber').value = '';
+    }
+
+    function goHome() {
+        document.getElementById('popup').style.display = 'none';
+        document.getElementById('celebration').style.display = 'none';
+    }
+
+    function exit() {
+        window.close();
+    }
+</script>
+
+</body>
+</html>
